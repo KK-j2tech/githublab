@@ -10,3 +10,13 @@ jobs:
        run: echo 'Hi, This is my first job'
      - name: get linux os version details
        run: cat /etc/os-release
+  job2:
+   name: job2
+   runs-on: ubuntu-latest
+   steps:
+     - name: getting the hostname
+       run: hostname
+     - name: running multiple commands
+       run: |
+        echo "This is testing job2"
+        echo "This is understanding workflow"
