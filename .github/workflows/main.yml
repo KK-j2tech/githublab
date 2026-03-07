@@ -7,6 +7,6 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - name: running single command on linux
-       run: echo'Hi, This is my first job'
+       run: echo 'Hi, This is my first job'
      - name: get linux os version details
        run: cat /etc/os-release
