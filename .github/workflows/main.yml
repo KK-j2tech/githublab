@@ -30,12 +30,12 @@ jobs:
        run: sleep 10
      - name: get system info
        shell: PWSH
-       run: get-systeminfo
+       run: get-computerinfo
 
   job4:
    name: job4
    needs: [job1, job2]
-   runs-on: macos-13
+   runs-on: macos-latest
    steps:
      - name: this is multiple dependencies
        run: sleep 20
