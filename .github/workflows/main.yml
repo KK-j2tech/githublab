@@ -24,16 +24,21 @@ jobs:
   job3:
    name: job3
    needs: job1
-   runs-on: ubuntu-latest
+   runs-on: windows-latest
    steps:
      - name: this is dependency job test
        run: sleep 10
+     - name: get system info
+       shell: PWSH
+       run: get-systeminfo
 
   job4:
    name: job4
    needs: [job1, job2]
-   runs-on: ubuntu-latest
+   runs-on: macos-13
    steps:
      - name: this is multiple dependencies
        run: sleep 20
+     - name: get mac os info
+       run: sw_vers
        
