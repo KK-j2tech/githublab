@@ -20,3 +20,20 @@ jobs:
        run: |
         echo "This is testing job2"
         echo "This is understanding workflow"
+
+  job3:
+   name: job3
+   needs: job1
+   runs-on: ubuntu-latest
+   steps:
+     - name: this is dependency job test
+       run: sleep 10
+
+  job4:
+   name: job4
+   needs: [job1, job2]
+   runs-on: ubuntu-latest
+   steps:
+     - name: this is multiple dependencies
+       run: sleep 20
+       
