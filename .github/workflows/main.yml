@@ -1,46 +1,20 @@
 name: main
-on:
-    push:
-    workflow_dispatch:
+on: push
 
 jobs:
   job1:
    name: JOB1
    runs-on: ubuntu-latest
    steps:
-     - name: running single command on linux
-       run: echo 'Hi, This is my first job'
-     - name: get linux os version details
-       run: cat /etc/os-release
-  job2:
-   name: job2
-   runs-on: ubuntu-latest
-   steps:
-     - name: getting the hostname
-       run: hostname
-     - name: running multiple commands
+     - name: step1
        run: |
-        echo "This is testing job2"
-        echo "This is understanding workflow"
-
-  job3:
-   name: job3
-   needs: job1
-   runs-on: windows-latest
-   steps:
-     - name: this is dependency job test
-       run: sleep 10
-     - name: get system info
-       shell: PWSH
-       run: get-computerinfo
-
-  job4:
-   name: job4
-   needs: [job1, job2]
-   runs-on: macos-latest
-   steps:
-     - name: this is multiple dependencies
-       run: sleep 20
-     - name: get mac os info
-       run: sw_vers
-       
+            pwd
+            hostname
+            ls -ltr
+     - name: step2 - checkout
+       uses: actions/checkout@v6.0.2
+     - name: step3
+       run: |
+             pwd
+             hostname
+             ls -ltr
