@@ -26,10 +26,10 @@ jobs:
          path: |
             ./workingdirectory.txt
             artifact/
-     - name: upload artifact
+     - name: upload artifact 1
        uses: actions/upload-artifact@v4
        with:
-         name: pwd file
+         name: pwd file 1
          path: |
             ./workingdirectory.txt
             artifact/
