@@ -16,10 +16,21 @@ jobs:
      - name: step3
        run: |
              echo 'pwd' >> ./workingdirectory.txt
-             hostname
-             ls -ltr
+             mkdir artifact
+             echo 'hostname' >> artifact/hostname.txt
+             echo 'ls -ltr' >> artifact/list.txt
      - name: upload artifact
        uses: actions/upload-artifact@v4
        with:
          name: pwd file
-         path: ./workingdirectory.txt
+         path: |
+            ./workingdirectory.txt
+            artifact/
+     - name: upload artifact
+       uses: actions/upload-artifact@v4
+       with:
+         name: pwd file
+         path: |
+            ./workingdirectory.txt
+            artifact/
+            !**/hostname.txt
