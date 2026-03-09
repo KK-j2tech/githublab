@@ -3,7 +3,10 @@ on:
   push:
     branches:
       - dev
-      - feature-1
+      - 'feature-*'
+  pull_request:
+    branches:
+      - main
 jobs:
   job1:
    name: job1
