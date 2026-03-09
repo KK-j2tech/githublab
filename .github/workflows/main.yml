@@ -66,7 +66,10 @@ jobs:
    needs: job1
    runs-on: ubuntu-latest
    steps:
-     - name: step1 - checking current directory
+     - name: step1 - creating custom location
+       run: |
+         mkdir -p multiplefiles_directory
+     - name: step2 - checking current directory
        run: |
          pwd
          ls -ltr
@@ -74,6 +77,7 @@ jobs:
        uses: actions/download-artifact@v5.0.0
        with:
          name: directory_artifact
+         path: multiplefiles_directory
      - name: checking current directory post check
        run: |
          pwd
