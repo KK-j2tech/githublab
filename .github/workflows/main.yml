@@ -3,48 +3,62 @@ on: push
 
 jobs:
   job1:
-   name: JOB1
+   name: job1
    runs-on: ubuntu-latest
    steps:
      - name: step1
        run: |
-            pwd
-            hostname
-            ls -ltr
+        pwd
+        hostname
+        ls -ltr
      - name: step2 - checkout
-       uses: actions/checkout@v6.0.2
+       uses: actions/checkout@v6.0.0
      - name: step3
-       run: |
-             echo 'pwd' >> ./workingdirectory.txt
-             mkdir artifact
-             echo 'hostname' >> artifact/hostname.txt
-             echo 'ls -ltr' >> artifact/list.txt
-     - name: upload artifact
-       uses: actions/upload-artifact@v4
+       run: 
+         echo 'pwd' >> myartifact.txt
+         mkdir artifacts
+         echo 'ls -ltr' >> artifacts/list.txt
+         echo 'hostname' >> artifacts/hostname.txt
+     - name: upload single file
+       uses: actions/upload-artifact@v5.0.0
        with:
-         name: pwd file
-         path: |
-            ./workingdirectory.txt
-            artifact/
-     - name: upload artifact 1
-       uses: actions/upload-artifact@v4
+          name: single_file
+          path: ./myartifact.txt
+     - name: upload from directory
+       uses: actions/upload-artifact@v5.0.0
        with:
-         name: pwd file 1
+         name: directory_artifact
+         path: artifacts/
+     - name: upload from multiple paths
+       uses: actions/upload-artifact@v5.0.0
+       with:
+          name: multiple_paths
+          path: |
+            ./myartifact.txt
+            artifacts/
+     - name: upload from multiple path with exculsion
+       uses: actions/upload-artifact@v5.0.0
+       with:
+         name: multiple_paths_with_exclusions
          path: |
-            ./workingdirectory.txt
-            artifact/
-            !**/hostname.txt
+           ./myartifact.txt
+           artifacts/
+           !**/hostname.txt
   job2:
    name: job2
    runs-on: ubuntu-latest
    steps:
-    - name: step1
+    - name: step1- checking current directory
       run: |
         pwd
-        hostname
-    - name: step2
-      uses: actions/download-artifact@v4
+        ls -ltr
+    - name: download artifact
+      uses: actions/download-artifact@v5.0.0
       with:
-       name: pwd file
-      
+        name: single_file
+    - name: checking current directory post download
+      run: |
+        pwd
+        ls -ltr
+        
   
