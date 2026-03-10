@@ -68,5 +68,7 @@ jobs:
         pwd
         ls -ltr
          ls -ltr
+    - name: PR demo test
+      run: exit 1
         
   
