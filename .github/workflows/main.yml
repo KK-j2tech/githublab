@@ -2,8 +2,7 @@ name: main
 on: 
   push:
     branches:
-      - dev
-      - 'feature-*'
+      - main
   pull_request:
     branches:
       - main
@@ -68,7 +67,5 @@ jobs:
         pwd
         ls -ltr
          ls -ltr
-    - name: PR demo test
-      run: exit 1
         
   
