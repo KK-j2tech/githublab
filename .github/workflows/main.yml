@@ -7,9 +7,9 @@ on:
     branches:
       - main
 env:
-  env_type: Dev
-  app_user: kiran
-  app_port: 80
+  ENV_TYPE: Dev
+  APP_USER: kiran
+  APP_Port: 80
 jobs:
   job1:
    name: job1
@@ -72,7 +72,7 @@ jobs:
         ls -ltr
     - name: Testing environment variables
       run: |
-         echo 'testing enviroment variables in paltform $env_type of user name is $app_user'
-         echo 'this app works on port $app_port'
+         echo 'testing enviroment variables in paltform $ENV_TYPE of user name is $APP_USER'
+         echo 'this app works on port $APP_PORT'
         
   
