@@ -75,5 +75,7 @@ jobs:
       run: |
          echo "testing enviroment variables in paltform $ENV_TYPE of user name is $APP_USER"
          echo "this app works on port $APP_Port"
+    - name: app secerts test
+      run: echo "applying secerts ${{ secrets.app_api }}"
         
   
