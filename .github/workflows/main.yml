@@ -6,6 +6,10 @@ on:
   pull_request:
     branches:
       - main
+env:
+  env_type: Dev
+  app_user: kiran
+  app_port: 80
 jobs:
   job1:
    name: job1
@@ -66,6 +70,9 @@ jobs:
       run: |
         pwd
         ls -ltr
-         ls -ltr
+    - name: Testing environment variables
+      run: |
+         echo 'testing enviroment variables in paltform $env_type of user name is $app_user'
+         echo 'this app works on port $app_port'
         
   
