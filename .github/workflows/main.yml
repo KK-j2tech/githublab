@@ -97,7 +97,7 @@ jobs:
      - name: reffering env password
        run: echo "refereing user ${{ vars.USER }} and password ${{ secrets.PASSWORD }}"
    environment: 
-     name: STAGING
+     name: staging
   production:
    name: Deploy into prod environment
    runs-on: ubuntu-latest
