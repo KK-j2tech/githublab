@@ -76,6 +76,16 @@ jobs:
          echo "testing enviroment variables in paltform $ENV_TYPE of user name is $APP_USER"
          echo "this app works on port $APP_Port"
     - name: app secerts test
-      run: echo "applying secerts ${{ secrets.APP_PASSWORD }}"
-        
+      run: echo "applying secerts ${{ secrets.APP_PASSWORD }}" 
+  job3:
+   name: job3
+   runs-on: ubuntu-latest
+   steps:
+     - name: context test
+       run: |
+         echo "This is texting of ${{ github.actor }}"
+         echo "understand workflow ${{ github.event_name }}"
+         echo " which OS is ${{ runner.os }}"
+         echo " Type of runner is ${{ runner.environment }}"
+         
   
