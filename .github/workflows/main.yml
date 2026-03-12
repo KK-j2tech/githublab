@@ -87,5 +87,25 @@ jobs:
          echo "understand workflow ${{ github.event_name }}"
          echo " which OS is ${{ runner.os }}"
          echo " Type of runner is ${{ runner.environment }}"
-         
-  
+  staging:
+   name: Deploy into staging environment
+   runs-on: ubuntu-latest
+   steps:
+     - name: reffering env variables
+       run: |
+         echo "refereing enviorment ${{ vars.HOST }} with user ${{ vars.USER }}"
+     - name: reffering env password
+       run: echo "refereing user ${{ vars.USER }} and password ${{ secrets.PASSWORD }}"
+   environment: 
+     name: STAGING
+  production:
+   name: Deploy into prod environment
+   runs-on: ubuntu-latest
+   steps:
+     - name: reffering env variables
+       run: |
+         echo "refereing enviorment ${{ vars.HOST }} with user ${{ vars.USER }}"
+     - name: reffering env password
+       run: echo "refereing user ${{ vars.USER }} and password ${{ secrets.PASSWORD }}"
+   environment: 
+     name: PRODUCTION
