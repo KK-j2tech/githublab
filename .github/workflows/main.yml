@@ -30,24 +30,24 @@ jobs:
         echo 'ls -ltr' >> artifacts/list.txt
         echo 'hostname' >> artifacts/hostname.txt
      - name: upload single file
-       uses: actions/upload-artifact@v5.0.0
+       uses: actions/upload-artifact@v6.0.0
        with:
           name: single_file
           path: ./myartifact.txt
      - name: upload from directory
-       uses: actions/upload-artifact@v5.0.0
+       uses: actions/upload-artifact@v6.0.0
        with:
          name: directory_artifact
          path: artifacts/
      - name: upload from multiple paths
-       uses: actions/upload-artifact@v5.0.0
+       uses: actions/upload-artifact@v6.0.0
        with:
           name: multiple_paths
           path: |
             ./myartifact.txt
             artifacts/
      - name: upload from multiple path with exculsion
-       uses: actions/upload-artifact@v5.0.0
+       uses: actions/upload-artifact@v6.0.0
        with:
          name: multiple_paths_with_exclusions
          path: |
@@ -64,7 +64,7 @@ jobs:
         pwd
         ls -ltr
     - name: download artifact
-      uses: actions/download-artifact@v5.0.0
+      uses: actions/download-artifact@v6.0.0
       with:
         name: single_file
     - name: checking current directory post download
@@ -90,6 +90,7 @@ jobs:
   staging:
    name: Deploy into staging environment
    runs-on: ubuntu-latest
+   if: github.ref == 'refs/heads/main'
    steps:
      - name: reffering env variables
        run: |
@@ -101,6 +102,7 @@ jobs:
   production:
    name: Deploy into prod environment
    runs-on: ubuntu-latest
+   if: github.ref == 'refs/heads/main'
    steps:
      - name: reffering env variables
        run: |
