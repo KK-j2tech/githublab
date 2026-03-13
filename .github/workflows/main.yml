@@ -90,7 +90,6 @@ jobs:
   staging:
    name: Deploy into staging environment
    runs-on: ubuntu-latest
-   if: github.ref == 'refs/heads/main'
    steps:
      - name: reffering env variables
        run: |
@@ -102,7 +101,6 @@ jobs:
   production:
    name: Deploy into prod environment
    runs-on: ubuntu-latest
-   if: github.ref == 'refs/heads/main'
    steps:
      - name: reffering env variables
        run: |
