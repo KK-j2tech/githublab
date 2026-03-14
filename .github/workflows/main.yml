@@ -1,6 +1,16 @@
 name: main
-on: push
-
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+env:
+  ENV_TYPE: Dev
+  APP_USER: kiran
+  APP_Port: 80
+  
 jobs:
   job1:
    name: job1
@@ -20,24 +30,24 @@ jobs:
         echo 'ls -ltr' >> artifacts/list.txt
         echo 'hostname' >> artifacts/hostname.txt
      - name: upload single file
-       uses: actions/upload-artifact@v5.0.0
+       uses: actions/upload-artifact@v6.0.0
        with:
           name: single_file
           path: ./myartifact.txt
      - name: upload from directory
-       uses: actions/upload-artifact@v5.0.0
+       uses: actions/upload-artifact@v6.0.0
        with:
          name: directory_artifact
          path: artifacts/
      - name: upload from multiple paths
-       uses: actions/upload-artifact@v5.0.0
+       uses: actions/upload-artifact@v6.0.0
        with:
           name: multiple_paths
           path: |
             ./myartifact.txt
             artifacts/
      - name: upload from multiple path with exculsion
-       uses: actions/upload-artifact@v5.0.0
+       uses: actions/upload-artifact@v6.0.0
        with:
          name: multiple_paths_with_exclusions
          path: |
@@ -54,33 +64,51 @@ jobs:
         pwd
         ls -ltr
     - name: download artifact
-      uses: actions/download-artifact@v5.0.0
+      uses: actions/download-artifact@v6.0.0
       with:
         name: single_file
     - name: checking current directory post download
       run: |
         pwd
         ls -ltr
+    - name: Testing environment variables
+      run: |
+         echo "testing enviroment variables in paltform $ENV_TYPE of user name is $APP_USER"
+         echo "this app works on port $APP_Port"
+    - name: app secerts test
+      run: echo "applying secerts ${{ secrets.APP_PASSWORD }}" 
   job3:
    name: job3
-   needs: job1
    runs-on: ubuntu-latest
    steps:
-     - name: step1 - creating custom location
+     - name: context test
        run: |
-         mkdir -p multiplefiles_directory
-     - name: step2 - checking current directory
+         echo "This is texting of ${{ github.actor }}"
+         echo "understand workflow ${{ github.event_name }}"
+         echo "${{ github.head_ref }}"
+         echo " which OS is ${{ runner.os }}"
+         echo " Type of runner is ${{ runner.environment }}"
+  staging:
+   name: Deploy into staging environment
+   runs-on: ubuntu-latest
+   steps:
+     - name: reffering env variables
        run: |
-         pwd
-         ls -ltr
-     - name: download directory artifact
-       uses: actions/download-artifact@v5.0.0
-       with:
-         name: directory_artifact
-         path: multiplefiles_directory
-     - name: checking current directory post check
+         echo "refereing enviorment ${{ vars.HOST }} with user ${{ vars.USER }}"
+     - name: reffering env password
+       run: echo "refereing user ${{ vars.USER }} and password ${{ secrets.PASSWORD }}"
+   environment: 
+     name: staging
+   if: github.head_ref == 'dev'
+  production:
+   name: Deploy into prod environment
+   runs-on: ubuntu-latest
+   steps:
+     - name: reffering env variables
        run: |
-         pwd
-         ls -ltr
-        
-  
+         echo "refereing enviorment ${{ vars.HOST }} with user ${{ vars.USER }}"
+     - name: reffering env password
+       run: echo "refereing user ${{ vars.USER }} and password ${{ secrets.PASSWORD }}"
+   environment: 
+     name: PRODUCTION
+   if: github.ref == 'main'
