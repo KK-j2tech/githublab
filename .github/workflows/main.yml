@@ -91,6 +91,7 @@ jobs:
   staging:
    name: Deploy into staging environment
    runs-on: ubuntu-latest
+   if: github.event_pull_request.merged == true || github.ref == 'refs/heads/main'
    steps:
      - name: reffering env variables
        run: |
