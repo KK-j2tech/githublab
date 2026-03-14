@@ -99,7 +99,7 @@ jobs:
        run: echo "refereing user ${{ vars.USER }} and password ${{ secrets.PASSWORD }}"
    environment: 
      name: staging
-   if: github.head_ref == 'refs/pull/1/merge'
+   if: github.head_ref == 'dev'
   production:
    name: Deploy into prod environment
    runs-on: ubuntu-latest
@@ -111,4 +111,4 @@ jobs:
        run: echo "refereing user ${{ vars.USER }} and password ${{ secrets.PASSWORD }}"
    environment: 
      name: PRODUCTION
-   if: github.ref == 'refs/heads/main'
+   if: github.ref == 'main'
