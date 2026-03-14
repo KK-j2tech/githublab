@@ -85,7 +85,7 @@ jobs:
        run: |
          echo "This is texting of ${{ github.actor }}"
          echo "understand workflow ${{ github.event_name }}"
-         echo "${{ github.ref_name }}"
+         echo "${{ github.head_ref }}"
          echo " which OS is ${{ runner.os }}"
          echo " Type of runner is ${{ runner.environment }}"
   staging:
